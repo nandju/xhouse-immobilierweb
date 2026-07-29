@@ -3,47 +3,63 @@ import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { StructuredData } from "@/components/structured-data"
 import "./globals.css"
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
+  display: "swap",
 })
 
 const SITE_URL = "https://x-house-immobilier.com"
 const SITE_NAME = "X-HOUSE IMMOBILIER"
+const SITE_TITLE = "X-HOUSE IMMOBILIER | Plateforme Immobilière Digitale en Côte d'Ivoire"
 const SITE_DESCRIPTION =
-  "X-HOUSE IMMOBILIER est votre plateforme immobilière digitale : recherchez, publiez et gérez vos biens en Côte d'Ivoire. Achat, location, terrain, villa et appartement à Abidjan."
+  "X-HOUSE IMMOBILIER est une plateforme immobilière digitale qui facilite la recherche, la location, l'achat, la vente et la publication de biens immobiliers en Côte d'Ivoire. Découvrez des villas, appartements, terrains, bureaux et locaux commerciaux en quelques clics."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Votre plateforme immobilière digitale`,
+    default: SITE_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
     "immobilier Côte d'Ivoire",
-    "location Abidjan",
+    "immobilier Abidjan",
     "achat maison",
-    "plateforme immobilière",
     "location appartement",
-    "terrain",
-    "villa",
-    "immobilier digital",
+    "villa Abidjan",
+    "terrain à vendre",
+    "maison Côte d'Ivoire",
+    "plateforme immobilière",
+    "annonces immobilières",
+    "investissement immobilier",
+    "agence immobilière digitale",
+    "X-HOUSE IMMOBILIER",
   ],
   generator: "X-HOUSE IMMOBILIER",
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
+  verification: {
+    google: "fPo-hoViLao4WH5hoLF1LcYWHrb8qFJC3wO5OMnxqRI",
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   openGraph: {
@@ -51,7 +67,7 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Votre plateforme immobilière digitale`,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [
       {
@@ -64,19 +80,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Votre plateforme immobilière digitale`,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: ["/assets/images/logo.png"],
   },
   icons: {
     icon: [
-      {
-        url: "/assets/images/logo.png",
-        type: "image/png",
-      },
+      { url: "/assets/images/logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/assets/images/logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/images/logo.png", sizes: "192x192", type: "image/png" },
+      { url: "/assets/images/logo.png", sizes: "512x512", type: "image/png" },
     ],
     shortcut: "/assets/images/logo.png",
-    apple: "/assets/images/logo.png",
+    apple: [{ url: "/assets/images/logo.png", sizes: "180x180", type: "image/png" }],
+  },
+  formatDetection: {
+    telephone: false,
   },
 }
 
@@ -88,6 +107,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={`${poppins.variable} font-sans antialiased`}>
+        <StructuredData />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           {children}
         </ThemeProvider>

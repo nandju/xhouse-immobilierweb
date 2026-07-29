@@ -44,7 +44,7 @@ const TESTIMONIALS = [
 // Helper for ticker items (partner logos)
 const TickerItem = ({ item }: { item: (typeof TRUSTED_COMPANIES)[0] }) => (
   <div className="flex items-center justify-center h-10 px-6 whitespace-nowrap grayscale hover:grayscale-0 opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300">
-    <Image src={item.src} alt={item.name} width={72} height={32} className="h-8 w-auto object-contain" />
+    <Image src={item.src} alt={item.name} width={72} height={32} loading="lazy" className="h-8 w-auto object-contain" />
   </div>
 )
 
@@ -70,6 +70,7 @@ export const DesignSidebar = () => {
               alt="X-HOUSE IMMOBILIER"
               width={40}
               height={40}
+              priority
               className="w-auto h-10"
             />
           </div>
@@ -105,7 +106,7 @@ export const DesignSidebar = () => {
               <span className="text-lg tracking-[-0.6px] font-medium font-display whitespace-nowrap">
                 Accéder à la plateforme
               </span>
-              <ArrowRightCircle size={20} className="transition-transform duration-300 group-hover:-rotate-45" />
+              <ArrowRightCircle aria-hidden="true" size={20} className="transition-transform duration-300 group-hover:-rotate-45" />
             </a>
             <AboutModal />
           </div>

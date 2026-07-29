@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react"
 import { motion } from "framer-motion"
 import { ArrowRight, Home } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { getNextProject } from "@/lib/project-data"
 import { ContactForm } from "./contact-form"
 
@@ -38,7 +39,7 @@ export function ProjectDetail({ project }: { project: ProjectData }) {
           href="/"
           className="inline-flex items-center gap-2 mb-8 text-sm text-foreground/70 hover:text-[#C59800] transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft aria-hidden="true" className="w-4 h-4" />
           Retour à l'accueil
         </Link>
 
@@ -48,7 +49,7 @@ export function ProjectDetail({ project }: { project: ProjectData }) {
           className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-[#C59800] text-[#08101A] rounded-full flex items-center justify-center shadow-lg hover:bg-[#e0ac00] transition-colors"
           aria-label="Retour à l'accueil"
         >
-          <Home className="w-5 h-5" />
+          <Home aria-hidden="true" className="w-5 h-5" />
         </Link>
 
         {/* Header Section */}
@@ -82,11 +83,14 @@ export function ProjectDetail({ project }: { project: ProjectData }) {
         </motion.header>
 
         {/* Hero Image */}
-        <motion.div className="mb-12 rounded-2xl overflow-hidden" {...fadeInUp}>
-          <img
+        <motion.div className="relative mb-12 rounded-2xl overflow-hidden aspect-[4/3]" {...fadeInUp}>
+          <Image
             src={project.heroImage || "/placeholder.svg"}
-            alt={`${project.title} hero`}
-            className="w-full aspect-[4/3] object-cover"
+            alt={`${project.title} – X-HOUSE IMMOBILIER`}
+            fill
+            priority
+            sizes="(max-width: 800px) 100vw, 800px"
+            className="object-cover"
           />
         </motion.div>
 
@@ -99,11 +103,14 @@ export function ProjectDetail({ project }: { project: ProjectData }) {
         {/* Gallery Images */}
         <div className="space-y-6 mb-12">
           {project.galleryImages.map((src, index) => (
-            <motion.div key={index} className="rounded-2xl overflow-hidden" {...fadeInUp}>
-              <img
+            <motion.div key={index} className="relative rounded-2xl overflow-hidden aspect-[4/3]" {...fadeInUp}>
+              <Image
                 src={src || "/placeholder.svg"}
-                alt={`${project.title} gallery ${index + 1}`}
-                className="w-full aspect-[4/3] object-cover"
+                alt={`${project.title} – illustration ${index + 1}`}
+                fill
+                loading="lazy"
+                sizes="(max-width: 800px) 100vw, 800px"
+                className="object-cover"
               />
             </motion.div>
           ))}
@@ -128,7 +135,7 @@ export function ProjectDetail({ project }: { project: ProjectData }) {
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#C59800] text-[#08101A] rounded-full text-sm font-medium hover:bg-[#e0ac00] transition-colors"
           >
             {nextProject.title}
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight aria-hidden="true" className="w-4 h-4" />
           </Link>
         </motion.div>
 

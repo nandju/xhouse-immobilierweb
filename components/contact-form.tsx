@@ -40,8 +40,9 @@ export function ContactForm() {
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-normal text-foreground">Nom</label>
+            <label htmlFor="contact-name" className="text-[13px] font-normal text-foreground">Nom</label>
             <input
+              id="contact-name"
               type="text"
               placeholder="Jean Kouassi"
               className="w-full h-10 px-4 bg-foreground/10 text-foreground placeholder:text-foreground/40 rounded-full border-none text-sm focus:outline-none focus:ring-1 focus:ring-[#C59800] transition-shadow"
@@ -52,8 +53,9 @@ export function ContactForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-normal text-foreground">Email</label>
+            <label htmlFor="contact-email" className="text-[13px] font-normal text-foreground">Email</label>
             <input
+              id="contact-email"
               type="email"
               placeholder="jean@exemple.com"
               className="w-full h-10 px-4 bg-foreground/10 text-foreground placeholder:text-foreground/40 rounded-full border-none text-sm focus:outline-none focus:ring-1 focus:ring-[#C59800] transition-shadow"
@@ -65,9 +67,10 @@ export function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-[13px] font-normal text-foreground">Type de bien recherché</label>
+          <label htmlFor="contact-service" className="text-[13px] font-normal text-foreground">Type de bien recherché</label>
           <div className="relative">
             <select
+              id="contact-service"
               className="w-full h-10 px-4 pr-10 bg-foreground/10 text-foreground rounded-full border-none text-sm appearance-none focus:outline-none"
               value={formData.service}
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -100,8 +103,9 @@ export function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-[13px] font-normal text-foreground">Décrivez votre projet</label>
+          <label htmlFor="contact-message" className="text-[13px] font-normal text-foreground">Décrivez votre projet</label>
           <textarea
+            id="contact-message"
             placeholder="Parlez-nous de votre projet immobilier..."
             className="w-full h-24 px-4 py-3 bg-foreground/10 text-foreground placeholder:text-foreground/40 rounded-2xl border-none text-sm resize-none focus:outline-none focus:ring-1 focus:ring-[#C59800] transition-shadow"
             value={formData.message}
@@ -111,9 +115,10 @@ export function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-[13px] font-normal text-foreground">Quel est votre budget ?</label>
+          <label htmlFor="contact-budget" className="text-[13px] font-normal text-foreground">Quel est votre budget ?</label>
           <div className="relative">
             <select
+              id="contact-budget"
               className="w-full h-10 px-4 pr-10 bg-foreground/10 text-foreground rounded-full border-none text-sm appearance-none focus:outline-none"
               value={formData.budget}
               onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
@@ -147,7 +152,7 @@ export function ContactForm() {
 
         <div className="flex flex-wrap items-center justify-between gap-5 mt-8">
           <div className="flex items-center gap-2.5">
-            <Clock className="w-5 h-5 text-[#C59800]" />
+            <Clock aria-hidden="true" className="w-5 h-5 text-[#C59800]" />
             <span className="text-sm text-foreground/70">Réponse sous 12 heures en moyenne</span>
           </div>
           <button

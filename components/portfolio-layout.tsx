@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { PROJECTS } from "@/lib/project-data"
@@ -20,17 +21,21 @@ export const PortfolioLayout = () => {
           </p>
         </div>
 
-        {PROJECTS.map((project) => (
+        {PROJECTS.map((project, index) => (
           <Link
             key={project.id}
             href={`/work/${project.id}`}
             className="group block bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow relative border border-foreground/5"
           >
-            <div className="relative overflow-hidden">
-              <img
+            <div className="relative overflow-hidden aspect-[4/3]">
+              <Image
                 src={project.heroImage || "/placeholder.svg"}
-                alt={project.title}
-                className="w-full aspect-[4/3] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                alt={`${project.title} – X-HOUSE IMMOBILIER`}
+                fill
+                sizes="(max-width: 768px) 100vw, 1200px"
+                priority={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
@@ -38,7 +43,7 @@ export const PortfolioLayout = () => {
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 flex items-end justify-between">
                 <div className="flex items-center gap-2 text-foreground">
                   <span className="text-xl md:text-2xl font-medium">{project.title}</span>
-                  <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-[#C59800] transition-transform duration-300 group-hover:-rotate-45" />
+                  <ArrowUpRight aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6 text-[#C59800] transition-transform duration-300 group-hover:-rotate-45" />
                 </div>
                 <span className="text-xl md:text-2xl text-[#C59800] font-light hidden md:block">{project.year}</span>
               </div>
